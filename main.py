@@ -9,7 +9,6 @@ from tkinter import *
 from tkmacosx import *
 from tkinter import ttk
 
-
 dataSet=pd.read_csv("insurance dataset.csv")
 print(dataSet.head())
 print("rows :",dataSet.shape[0],"columns :",dataSet.shape[1])
@@ -72,7 +71,7 @@ plt.show()
 dataSet.replace({'sex':{'male':0,'female':1}}, inplace=True)
 
 # encoding 'smoker' column
-dataSet.replace({'smoker':{'yes':0,'no':1}}, inplace=True)
+dataSet.replace({'smoker':{'yes':1,'no':0}}, inplace=True)
 
 # encoding 'region' column
 dataSet.replace({'region':{'southeast':1,'southwest':2,'northeast':3,'northwest':4}}, inplace=True)
@@ -103,6 +102,60 @@ test_data_prediction =regressor.predict(X_test)
 # R squared value
 r2_test = metrics.r2_score(Y_test, test_data_prediction)
 print('R squared vale : ', r2_test)
+
+'''
+input_data = (31,1,25.74,0,1,0)
+
+# changing input_data to a numpy array
+input_data_as_numpy_array = np.asarray(input_data)
+
+# reshape the array
+input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+
+prediction = regressor.predict(input_data_reshaped)
+print(prediction)
+
+print('The insurance cost is USD ', prediction[0])
+
+'''
+
+
+def prediction(root):
+    Age = int(age.get())
+    temp = sexOption.get()
+    Sex = 1
+    if temp == 'Male':
+        Sex = 0
+    Bmi = float(bmi.get())
+    Children = int(children.get())
+    temp = smokeOption.get()
+    Smoke = 1
+    if temp == 'No':
+        Smoke = 0
+    temp = regionOption.get()
+    Region = 1
+    if temp == "southeast":
+        Region = 2
+    elif temp == "northwest":
+        Region = 3
+    else:
+        Region = 4
+    input_data = (Age, Sex, Bmi, Children, Smoke, Region)
+    # changing input_data to a numpy array
+
+    input_data_as_numpy_array = np.asarray(input_data)
+
+    # reshape the array
+    input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
+
+    prediction = regressor.predict(input_data_reshaped)
+    # result.config(text='The insurance cost is USD '+ prediction[0])
+    print('The insurance cost is USD ' , prediction[0])
+    text=float(prediction[0])
+    result = Label(root,text="The insurance cost is %.2f USD"%text, font="helvetica 20 bold", fg='green', bg='black')
+    result.place(x=400, y=300, anchor="center")
+
+
 
 ### end of training and testing process ###
 
@@ -146,6 +199,8 @@ temp.grid(row=3,column=3,padx=5,pady=5)
 temp.current()
 
 
+Button(root, text="Get Insurance Cost", font="helvetica 25 bold", fg="green", bg="black", borderless=1,
+       command=lambda:prediction(root)).place(x=400,y=180,anchor='center')
 
 
 root.mainloop()
