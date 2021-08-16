@@ -5,6 +5,10 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
+from tkinter import *
+from tkmacosx import *
+from tkinter import ttk
+
 
 dataSet=pd.read_csv("insurance dataset.csv")
 print(dataSet.head())
@@ -101,6 +105,50 @@ r2_test = metrics.r2_score(Y_test, test_data_prediction)
 print('R squared vale : ', r2_test)
 
 ### end of training and testing process ###
+
+
+root=Tk()
+root.geometry("800x400")
+root.configure(bg='#faefcf')
+root.title("Medical Insurance Prediction")
+Label(root,text="Please fill all the options to get your insurance prediction!",fg='black',bg='red',font='Verdana 24 bold').grid(row=0,column=0,columnspan=10)
+Label(root,text="Age: ",fg='black',bg='yellow',font='Verdana 15 bold').grid(row=1,column=0,padx=5,pady=5)
+age=StringVar()
+Entry(root,fg='black',textvariable=age,font='Helvetica 15 bold').grid(row=1,column=1,padx=5,pady=5,columnspan=1)
+Label(root,text='Sex: ',fg='black',bg='yellow',font='Verdana 15 bold').grid(row=1,column=2,padx=5,pady=5)
+
+sexOption=StringVar()
+temp=ttk.Combobox(root,width=20,textvariable=sexOption)
+temp['values']=('Male','Female')
+temp.grid(row=1,column=3,padx=5,pady=5)
+temp.current()
+
+Label(root,text='BMI: ',fg='black',bg='yellow',font='Verdana 15 bold').grid(row=2,column=0,padx=5,pady=5)
+bmi=StringVar()
+Entry(root,fg='black',textvariable=bmi,font='Helvetica 15 bold').grid(row=2,column=1,padx=5,pady=5)
+
+Label(root,text='Children: ',fg='black',bg='yellow',font='Verdana 15 bold').grid(row=2,column=2,padx=5,pady=5)
+children=StringVar()
+Entry(root,fg='black',textvariable=children,font='Helvetica 15 bold').grid(row=2,column=3,padx=5,pady=5)
+
+Label(root,text='Smoker: ',fg='black',bg='yellow',font='Verdana 15 bold').grid(row=3,column=0,padx=5,pady=5)
+smokeOption=StringVar()
+temp=ttk.Combobox(root,width=20,textvariable=smokeOption)
+temp['values']=('Yes',"No")
+temp.grid(row=3,column=1,padx=5,pady=5)
+temp.current()
+
+Label(root,text='Region: ',fg='black',bg='yellow',font='Verdana 15 bold').grid(row=3,column=2,padx=5,pady=5)
+regionOption=StringVar()
+temp=ttk.Combobox(root,width=20,textvariable=regionOption)
+temp['values']=('southwest','southeast','northwest','northeast')
+temp.grid(row=3,column=3,padx=5,pady=5)
+temp.current()
+
+
+
+
+root.mainloop()
 
 
 
