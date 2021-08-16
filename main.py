@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 
-dataSet=pd.read_csv("insurance.csv")
+dataSet=pd.read_csv("insurance dataset.csv")
 print(dataSet.head())
 print("rows :",dataSet.shape[0],"columns :",dataSet.shape[1])
 print("\nData Set Info\n")
