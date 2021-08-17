@@ -17,7 +17,7 @@ dataSet.info()
 
 print("\n\n",dataSet.describe())
 
-# distribution of age value
+# distribution of age valuer
 sns.set()
 plt.figure(figsize=(6,6))
 sns.histplot(dataSet['age'])
@@ -152,7 +152,7 @@ def prediction(root):
     # result.config(text='The insurance cost is USD '+ prediction[0])
     print('The insurance cost is USD ' , prediction[0])
     text=float(prediction[0])
-    result = Label(root,text="The insurance cost is %.2f USD"%text, font="helvetica 20 bold", fg='green', bg='black')
+    result = Label(root,text="The insurance cost is %.2f USD"%abs(text), font="helvetica 20 bold", fg='green', bg='black')
     result.place(x=400, y=300, anchor="center")
 
 
